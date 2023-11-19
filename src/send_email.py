@@ -42,5 +42,3 @@ async def send_email_async(file: UploadFile = File(...)):
     fm = FastMail(conf)
     await fm.send_message(message)
     return JSONResponse(status_code=200, content={"message": "email has been sent"})
-
-send_email_async()
