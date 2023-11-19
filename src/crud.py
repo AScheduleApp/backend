@@ -33,4 +33,4 @@ def create_or_update_schedule(db: Session, file: UploadFile = File(...)):
         db.close()
         return old_schedule, True
 
-    return old_schedule, True
+    return old_schedule, False
