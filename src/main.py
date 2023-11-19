@@ -18,16 +18,4 @@ async def schedule_create_or_update(
     file: UploadFile = File(...), db: Session = Depends(get_db)
 ):
     obj, is_send_email = crud.create_or_update_schedule(db=db, file=file)
-    if True:
-        print("Weszło w maila")
-        await file.seek(0)
-        message = MessageSchema(
-            subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
-            recipients=SMPTEnvs.MAILS_TO,
-            body=SMPTEnvs.MESSAGE,
-            subtype="html",
-            attachments=[file],
-        )
-        fm = FastMail(conf)
-        await fm.send_message(message)
     return obj

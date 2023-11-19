@@ -1,9 +1,11 @@
 import hashlib
 
 from fastapi import File, UploadFile
+from fastapi_mail import MessageSchema, FastMail
 from sqlalchemy.orm import Session
 
 from . import models
+from .email_config import SMPTEnvs, conf
 
 
 def get_last_schedule(db: Session):
@@ -30,6 +32,17 @@ def create_or_update_schedule(db: Session, file: UploadFile = File(...)):
         db.refresh(old_schedule)
         db.close()
 
-        return old_schedule, True
+    file.file.seek(0)
+    file.seek(0)
 
-    return old_schedule
+    message = MessageSchema(
+        subject="Aktualizacja planu zajeć",
+        recipients=SMPTEnvs.MAILS_TO,
+        body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
+        subtype="html",
+        attachments=[file],
+    )
+    fm = FastMail(conf)
+    fm.send_message(message)
+
+    return old_schedule, True
