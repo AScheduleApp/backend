@@ -38,14 +38,14 @@ def create_or_update_schedule(db: Session, file: UploadFile = File(...)):
         file.file.seek(0)
         file.seek(0)
 
-        message = MessageSchema(
-            subject="Aktualizacja planu zajeć",
-            recipients=SMPTEnvs.MAILS_TO,
-            body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
-            subtype="html",
-            attachments=[file],
-        )
-        fm = FastMail(conf)
-        fm.send_message(message)
+    message = MessageSchema(
+        subject="Aktualizacja planu zajeć",
+        recipients=SMPTEnvs.MAILS_TO,
+        body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
+        subtype="html",
+        attachments=[file],
+    )
+    fm = FastMail(conf)
+    fm.send_message(message)
 
     return old_schedule
