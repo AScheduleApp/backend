@@ -21,9 +21,9 @@ async def schedule_create_or_update(
 
     await file.seek(0)
     message = MessageSchema(
-        subject="Aktualizacja planu zajeć",
+        subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
         recipients=SMPTEnvs.MAILS_TO,
-        body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
+        body=SMPTEnvs.MESSAGE,
         subtype="html",
         attachments=[file],
     )
@@ -36,9 +36,9 @@ async def schedule_create_or_update(
 @app.get("/test")
 async def send_email():
     message = MessageSchema(
-        subject="Aktualizacja planu zajeć",
+        subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
         recipients=SMPTEnvs.MAILS_TO,
-        body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
+        body=SMPTEnvs.MESSAGE,
         subtype="html",
     )
     fm = FastMail(conf)
