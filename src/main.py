@@ -19,16 +19,17 @@ async def schedule_create_or_update(
 ):
     obj, is_send_email = crud.create_or_update_schedule(db=db, file=file)
 
-    await file.seek(0)
-    message = MessageSchema(
-        subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
-        recipients=SMPTEnvs.MAILS_TO,
-        body=SMPTEnvs.MESSAGE,
-        subtype="html",
-        attachments=[file],
-    )
-    fm = FastMail(conf)
-    await fm.send_message(message)
+    if is_send_email:
+        await file.seek(0)
+        message = MessageSchema(
+            subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
+            recipients=SMPTEnvs.MAILS_TO,
+            body=SMPTEnvs.MESSAGE,
+            subtype="html",
+            attachments=[file],
+        )
+        fm = FastMail(conf)
+        await fm.send_message(message)
 
     return obj
 
