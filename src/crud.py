@@ -5,6 +5,7 @@ from fastapi import File, UploadFile
 from sqlalchemy.orm import Session
 
 from . import models
+from .send_email import send_email_async
 
 
 def get_last_schedule(db: Session):
@@ -34,4 +35,7 @@ def create_or_update_schedule(db: Session, file: UploadFile = File(...)):
         db.refresh(old_schedule)
         db.close()
 
+        file.file.seek(0)
+        file.seek(0)
+        send_email_async(file=file)
     return old_schedule

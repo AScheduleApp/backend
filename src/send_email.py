@@ -13,6 +13,7 @@ class SMPTEnvs:
     MAIL_PORT = int(os.getenv("MAIL_PORT"))
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_FROM_NAME = os.getenv("MAIN_FROM_NAME")
+    MAILS_TO = os.getenv("MAILS_TO").split(",")
 
 
 conf = ConnectionConfig(
@@ -29,10 +30,10 @@ conf = ConnectionConfig(
 )
 
 
-async def send_email_async(email_to: List[str], file: UploadFile = File(...)):
+async def send_email_async(file: UploadFile = File(...)):
     message = MessageSchema(
         subject="Aktualizacja planu zajeć",
-        recipients=email_to,
+        recipients=SMPTEnvs.MAILS_TO,
         body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
         subtype="html",
         attachments=[file],
