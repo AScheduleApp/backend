@@ -14,6 +14,10 @@ class SMPTEnvs:
     MAIL_SERVER = os.getenv("MAIL_SERVER")
     MAIL_FROM_NAME = os.getenv("MAIL_FROM_NAME")
     MAILS_TO = os.getenv("MAILS_TO").split(",")
+    MAIL_STARTTLS = bool(int(os.getenv("MAIL_STARTTLS")))
+    MAIL_TLS = bool(int(os.getenv("MAIL_TLS")))
+    MAIL_SSL = bool(int(os.getenv("MAIL_SSL")))
+    USE_CREDENTIALS = bool(int(os.getenv("USE_CREDENTIALS")))
 
 
 conf = ConnectionConfig(
@@ -22,11 +26,10 @@ conf = ConnectionConfig(
     MAIL_FROM=SMPTEnvs.MAIL_FROM,
     MAIL_PORT=SMPTEnvs.MAIL_PORT,
     MAIL_SERVER=SMPTEnvs.MAIL_SERVER,
-    MAIL_FROM_NAME=SMPTEnvs.MAIL_FROM_NAME,
-    MAIL_TLS=True,
-    MAIL_SSL=False,
-    USE_CREDENTIALS=True,
-    TEMPLATE_FOLDER="./templates/email",
+    MAIL_STARTTLS=SMPTEnvs.MAIL_STARTTLS,
+    MAIL_TLS=SMPTEnvs.MAIL_TLS,
+    MAIL_SSL=SMPTEnvs.MAIL_SSL,
+    USE_CREDENTIALS=SMPTEnvs.USE_CREDENTIALS,
 )
 
 
