@@ -12,7 +12,7 @@ class SMPTEnvs:
     MAIL_FROM = os.getenv("MAIL_FROM")
     MAIL_PORT = int(os.getenv("MAIL_PORT"))
     MAIL_SERVER = os.getenv("MAIL_SERVER")
-    MAIL_FROM_NAME = os.getenv("MAIN_FROM_NAME")
+    MAIL_FROM_NAME = os.getenv("MAIL_FROM_NAME")
     MAILS_TO = os.getenv("MAILS_TO").split(",")
 
 

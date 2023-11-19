@@ -7,9 +7,9 @@ services:
       - postgres_data_backend:/var/lib/postgresql/data/
     ports:
       - "5432"
-    container_name: song_app_db
+    container_name: fastapi_app_db
     env_file:
-      - .envs/local/db/db.env
+      - .envs/prod/db/db.env
     networks:
       - bot_network
   web:
@@ -18,7 +18,7 @@ services:
       - "8000"
     container_name: fastapi_app
     env_file:
-      - .envs/local/web/app.env
+      - .envs/prod/web/app.env
     depends_on:
       - db
     networks:
