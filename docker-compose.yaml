@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data_backend:/var/lib/postgresql/data/
+    ports:
+      - "5432"
+    container_name: song_app_db
+    env_file:
+      - .envs/local/db/db.env
+    networks:
+      - bot_network
+  web:
+    build: .
+    ports:
+      - "8000"
+    container_name: fastapi_app
+    env_file:
+      - .envs/local/web/app.env
+    depends_on:
+      - db
+    networks:
+      - bot_network
+volumes:
+  postgres_data_backend:
+networks:
+  bot_network:
+    external: true
