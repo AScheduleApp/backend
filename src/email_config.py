@@ -13,12 +13,11 @@ class SMPTEnvs:
     MAIL_STARTTLS = bool(int(os.getenv("MAIL_STARTTLS")))
     MAIL_SSL_TLS = bool(int(os.getenv("MAIL_SSL_TLS")))
     USE_CREDENTIALS = bool(int(os.getenv("USE_CREDENTIALS")))
-    MESSAGE = """<p><span style="font-size:16px">Witam cię przyszły lekarko/lekarzu. 
-    Nastąpiła zmiana w planie zajęć</span>😉<br/>
-Plik w załączniku.</p>
-
-<p>&nbsp;</p>
-"""
+    MESSAGE = """<p>Witaj, nastąpiła zmiana w planie zajęć.</p>
+                <p>Powodzenia!</p>
+                <br></br>
+                Plik w załączniku.
+                """
 
 
 conf = ConnectionConfig(
