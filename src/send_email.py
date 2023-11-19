@@ -1,9 +1,5 @@
 import os
-from typing import List
-
-from fastapi import File, UploadFile
-from fastapi_mail import ConnectionConfig, FastMail, MessageSchema
-from starlette.responses import JSONResponse
+from fastapi_mail import ConnectionConfig
 
 
 class SMPTEnvs:
@@ -29,16 +25,3 @@ conf = ConnectionConfig(
     MAIL_SSL_TLS=SMPTEnvs.MAIL_SSL_TLS,
     USE_CREDENTIALS=SMPTEnvs.USE_CREDENTIALS,
 )
-
-
-async def send_email_async(file: UploadFile = File(...)):
-    message = MessageSchema(
-        subject="Aktualizacja planu zajeć",
-        recipients=SMPTEnvs.MAILS_TO,
-        body="<p>Hej! Właśnie został zaktualizowany twój plan zajeć :)!<br>Plik w załączniku.</p>",
-        subtype="html",
-        attachments=[file],
-    )
-    fm = FastMail(conf)
-    await fm.send_message(message)
-    return JSONResponse(status_code=200, content={"message": "email has been sent"})
