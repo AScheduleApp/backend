@@ -35,8 +35,8 @@ def create_or_update_schedule(db: Session, file: UploadFile = File(...)):
         db.refresh(old_schedule)
         db.close()
 
-        file.file.seek(0)
-        file.seek(0)
+    file.file.seek(0)
+    file.seek(0)
 
     message = MessageSchema(
         subject="Aktualizacja planu zajeć",
