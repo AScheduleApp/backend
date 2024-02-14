@@ -34,14 +34,14 @@ async def schedule_create_or_update(
     return obj
 
 
-@app.get("/test")
-async def send_email():
+@app.post("/send", response_model=schemas.Email)
+async def send_mails(email: schemas.Email):
     message = MessageSchema(
-        subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
-        recipients=SMPTEnvs.MAILS_TO,
-        body=SMPTEnvs.MESSAGE,
+        subject=email.subject,
+        recipients=email.addresses.split(","),
+        body=email.message,
         subtype="html",
     )
     fm = FastMail(conf)
     await fm.send_message(message)
-    return {"message": "Hello World"}
+    return email.dict()

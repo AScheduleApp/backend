@@ -10,3 +10,9 @@ class Schedule(ScheduleBase):
 
     class Config:
         from_attributes = True
+
+
+class Email(BaseModel):
+    addresses: str
+    message: str
+    subject: str
