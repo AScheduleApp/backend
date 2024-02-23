@@ -15,7 +15,7 @@ services:
   web:
     build: .
     ports:
-      - "8000"
+      - "40229:8000"
     container_name: fastapi_app
     env_file:
       - .envs/prod/web/app.env
