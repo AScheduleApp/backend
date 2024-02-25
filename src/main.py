@@ -22,7 +22,7 @@ async def schedule_create_or_update(
     if is_send_email:
         await file.seek(0)
         message = MessageSchema(
-            subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 3",
+            subject="Aktualizacja planu zajęć - AŚ - Lekarski semestr 4",
             recipients=SMPTEnvs.MAILS_TO,
             body=SMPTEnvs.MESSAGE,
             subtype="html",
